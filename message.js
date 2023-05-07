@@ -5,8 +5,8 @@ const fs = require('fs');
 Router.get('/',(req,res,next)=>{
     fs.readFile('message.txt',(err,data)=>{
         console.log(err);
-        res.send(`<h1>Send Message</h1>
-        <p>${data}</p>
+        res.send(`
+        ${data}
         <form action="/" method="POST" onsubmit="document.getElementById('username').value=localStorage.getItem('username')">
             <input type="text" id="message" name="message">
             <input type="hidden" name="username" id="username">
@@ -17,7 +17,7 @@ Router.get('/',(req,res,next)=>{
 
 Router.post('/',(req,res,next)=>{
     console.log(req.body);
-    fs.appendFileSync("message.txt",`=>${req.body.username} : ${req.body.message}  `)
+    fs.appendFileSync("message.txt",`${req.body.username} : ${req.body.message}`)
     res.redirect('/');
 })
 
